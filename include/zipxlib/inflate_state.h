@@ -20,7 +20,7 @@ along with zipxlib. If not, see http://www.gnu.org/licenses/.
 #pragma once
 
 #include <stdexcept>
-#include <zlib/zlib.h>
+#include "zlib.h"
 #include "debug.h"
 
 namespace zipx

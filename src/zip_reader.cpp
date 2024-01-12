@@ -40,7 +40,7 @@ namespace zipx
 		if (idx < 0)
 		{
 			char msg[256];
-			sprintf_s(msg, "File '%s' not found in zip archive", path);
+			snprintf(msg, sizeof(msg), "File '%s' not found in zip archive", path);
 			throw std::runtime_error(msg);
 		}
 		return open(idx, ret_file_info);

@@ -70,7 +70,11 @@ namespace zipx
 			// No time has been specified, use current time
 			const time_t now = time(NULL);
 			struct tm t;
+#ifdef _MSC_VER
 			localtime_s(&t, &now);
+#else
+			t = *localtime(&now);
+#endif
 			//const struct tm *t = localtime(&now);
 			curr_time.m_Year = t.tm_year + 1900;
 			curr_time.m_Month = t.tm_mon + 1;
@@ -200,7 +204,7 @@ namespace zipx
 	{
 		m_State = EState_Fail;
 		char buf[4096];
-		sprintf_s(buf, "CZipWriter: %s", msg);
+		snprintf(buf, sizeof(buf), "CZipWriter: %s", msg);
 		throw std::runtime_error(buf);
 	}
 }

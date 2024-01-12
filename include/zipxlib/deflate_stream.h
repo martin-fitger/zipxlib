@@ -55,7 +55,11 @@ namespace zipx
 	class deflate_stream : public std::ostream 
 	{
 	public:
+#ifdef _MSC_VER
 		deflate_stream() : std::ostream(&m_StreamBuf, false) {}
+#else
+		deflate_stream() : std::ostream(&m_StreamBuf) {}
+#endif
 		void reset(std::ostream& out, deflate_state* state = nullptr);
 		void finalize() { m_StreamBuf.finalize(); }
 		std::streamsize uncompressed_size() const { return m_StreamBuf.uncompressed_size(); }

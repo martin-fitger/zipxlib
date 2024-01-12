@@ -21,6 +21,10 @@ along with zipxlib. If not, see http://www.gnu.org/licenses/.
 #include <zipxlib/zip_index.h>
 #include "utils.h"
 
+#ifdef _MSC_VER
+    #define strcasecmp _stricmp
+#endif
+
 namespace zipx
 {
 	size_t zip_index::file_count() const
@@ -31,7 +35,7 @@ namespace zipx
 	ptrdiff_t zip_index::find(const char* path) const
 	{
 		for (const auto& f : m_Files)
-			if (_stricmp(f.m_Name, path) == 0)
+			if (strcasecmp(f.m_Name, path) == 0)
 				return &f - m_Files.data();
 		return -1;
 	}
